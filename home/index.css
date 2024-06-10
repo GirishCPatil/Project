@@ -1,0 +1,39 @@
+/* Ensure responsive styling */
+.typing-text {
+    display: inline-block;
+    border-right: 2px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
+    font-size: 2em;
+  }
+  
+  /* Animation for typing */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  /* Animation for blinking cursor */
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
+  }
+  
+  /* Ensure the text adjusts its size based on screen width */
+  @media (max-width: 768px) {
+    .typing-text {
+      font-size: 1.5em;
+      display: block;
+      white-space: normal;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .typing-text {
+      font-size: 1.2em;
+      display: block;
+      white-space: normal;
+    }
+  }
+  
