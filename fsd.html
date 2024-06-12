@@ -25,18 +25,22 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
-            width: 80vw;
+            width: 500px;
             text-align: center;
             transition: transform 0.3s ease;
             background: #fff;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow: hidden;
+            height: 400px; /* Fixed height for equal size */
         }
 
         .module:hover {
             transform: scale(1.05);
+        }
+
+        .buttons {
+            margin-top: 20px;
         }
 
         .download-btn,
@@ -45,13 +49,9 @@
             margin: 10px auto;
         }
 
-        .download-btn {
-            width: 90%;
-        }
-
         .pdf-viewer {
-            width: 90%;
-            height: 500px;
+            width: 100%;
+            height: 400px;
             border: none;
             margin-top: 10px;
             display: none;
@@ -90,72 +90,74 @@
             </div>
         </div>
     </nav>
-    <p style="text-align: center; font-size: 30px;  color: rgb(227, 66, 93); font-weight: 600;"> Software Engineering And Project Management - 21CS61</p>
+    <p style="text-align: center; font-size: 30px; color: rgb(202, 25, 54); font-weight: 600;"> Full Stack Development - 21CS62</p>
     <div class="container">
         <div class="module-container">
             <div class="module" id="module1">
                 <h4>Module 1</h4>
-                <p><b>Software and Software Engineering:</b> The nature of Software, The unique nature of WebApps, 
-                    Software Engineering, The software Process, The software Engineering practice, The software 
-                    myths, How it all starts.</p>
-                    <p><b>Process Models:</b> A generic process model, Process assessment and improvement, Prescriptive 
-                    process models, Waterfall model, Incremental process models, Evolutionary process models, Concurrent 
-                    models, Specialized process models</p>
-                <a class="btn btn-primary download-btn" href="./assests/module1.pdf" download>Download PDF</a>
-                <button class="btn btn-secondary view-btn" onclick="toggleViewer('module1-viewer')">View PDF</button>
+                <p>Web framework, MVC Design Pattern, Django Evolution, Views, Mapping URL to Views, Working of
+                    Django URL Confs and Loose Coupling, Errors in Django, Wild Card patterns in URLS</p>
+                <div class="buttons">
+                    <a class="btn btn-primary download-btn" href="./assests/module1.pdf" download>Download PDF</a>
+                    <button class="btn btn-secondary view-btn" onclick="toggleViewer('module1-viewer')">View PDF</button>
+                </div>
                 <iframe id="module1-viewer" class="pdf-viewer" src="./assests/module1.pdf"></iframe>
             </div>
             <div class="module" id="module2">
                 <h4>Module 2</h4>
-                <p><b>Understanding Requirements:</b> Requirements Engineering, Establishing the ground work, 
-                    Eliciting Requirements, Developing use cases, Building the requirements model, Negotiating 
-                    Requirements, Validating Requirements</p>
-                    
-                   <p> <b>Requirements Modeling Scenarios, Information and Analysis classes:</b> Requirement Analysis, 
-                    Scenario based modeling, UML models that supplement the Use Case, Data modeling Concepts class 
-                    Based Modeling</p>
-                <a class="btn btn-primary download-btn" href="./assests/module2.pdf" download>Download PDF</a>
-                <button class="btn btn-secondary view-btn" onclick="toggleViewer('module2-viewer')">View PDF</button>
+                <p>Template System Basics, Using Django Template System, Basic Template Tags and Filters, MVT
+                    Development Pattern, Template Loading, Template Inheritance, MVT Development Pattern.
+
+                    Configuring Databases, Defining and Implementing Models, Basic Data Access, Adding Model String
+                    Representations, Inserting/Updating data, Selecting and deleting objects, Schema Evolution </p>
+                <div class="buttons">
+                    <a class="btn btn-primary download-btn" href="./assests/module2.pdf" download>Download PDF</a>
+                    <button class="btn btn-secondary view-btn" onclick="toggleViewer('module2-viewer')">View PDF</button>
+                </div>
                 <iframe id="module2-viewer" class="pdf-viewer" src="./assests/module2.pdf"></iframe>
             </div>
             <div class="module" id="module3">
                 <h4>Module 3</h4>
-                <p><b>AGILE DEVELOPMENT:</b> What is Agility?, Agility and the cost of change. What is an agile Process?, 
-                    Extreme Programming (XP), Other Agile Process Models, A tool set for Agile process </p>
-                   <p><b> Principles that guide practice:</b> Software Engineering Knowledge, Core principles, Principles that 
-                    guide each framework activity</p>
-                <a class="btn btn-primary download-btn" href="./assests/module3.pdf" download>Download PDF</a>
-                <button class="btn btn-secondary view-btn" onclick="toggleViewer('module3-viewer')">View PDF</button>
+                <p>Activating Admin Interfaces, Using Admin Interfaces, Customizing Admin Interfaces, Reasons to use 
+                    Admin Interfaces. 
+                     
+                    Form Processing, Creating Feedback forms, Form submissions, custom validation, creating Model Forms, 
+                    URLConf Ticks, Including Other URLConfs.</p>
+                <div class="buttons">
+                    <a class="btn btn-primary download-btn" href="./assests/module3.pdf" download>Download PDF</a>
+                    <button class="btn btn-secondary view-btn" onclick="toggleViewer('module3-viewer')">View PDF</button>
+                </div>
                 <iframe id="module3-viewer" class="pdf-viewer" src="./assests/module3.pdf"></iframe>
             </div>
             <div class="module" id="module4">
                 <h4>Module 4</h4>
-                <p><b>Introduction to Project Management:</b> 
-                    Introduction, Project and Importance of Project Management, Contract Management, Activities Covered 
-                    by Software Project Management, Plans, Methods and Methodologies, Some ways of categorizing 
-                    Software Projects, Stakeholders, Setting Objectives, Business Case, Project Success and Failure, 
-                    Management and Management Control, Project Management life cycle, Traditional versus Modern 
-                    Project Management Practices. </p>
-                <a class="btn btn-primary download-btn" href="./assests/module4.pdf" download>Download PDF</a>
-                <button class="btn btn-secondary view-btn" onclick="toggleViewer('module4-viewer')">View PDF</button>
+                <p>Using Generic Views, Generic Views of Objects, Extending Generic Views of objects, Extending Generic 
+                    Views. 
+                     
+                    MIME Types, Generating Non-HTML contents like CSV and PDF, Syndication Feed Framework, Sitemap 
+                    framework, Cookies, Sessions, Users and Authentication.</p>
+                <div class="buttons">
+                    <a class="btn btn-primary download-btn" href="./assests/module4.pdf" download>Download PDF</a>
+                    <button class="btn btn-secondary view-btn" onclick="toggleViewer('module4-viewer')">View PDF</button>
+                </div>
                 <iframe id="module4-viewer" class="pdf-viewer" src="./assests/module4.pdf"></iframe>
             </div>
             <div class="module" id="module5">
                 <h4>Module 5</h4>
-                <p><b>Software Quality: </b>
-                    Introduction, The place of software quality in project planning, Importance of software quality, Defining 
-                    software quality, quality models, ISO 9126, product and process metrics, product versus process quality 
-                    management, Quality Management systems, process capability models, techniques to enhance software 
-                    quality, testing, Software reliability, quality plans. </p>
-                <a class="btn btn-primary download-btn" href="./assests/module5.pdf" download>Download PDF</a>
-                <button class="btn btn-secondary view-btn" onclick="toggleViewer('module5-viewer')">View PDF</button>
+                <p>Ajax Solution, Java Script, XHTMLHttpRequest and Response, HTML, CSS, JSON, iFrames, Settings of Java 
+                    Script in Django, jQuery and Basic AJAX, jQuery AJAX Facilities, Using jQuery UI Autocomplete in Django  </p>
+                <div class="buttons">
+                    <a class="btn btn-primary download-btn" href="./assests/module5.pdf" download>Download PDF</a>
+                    <button class="btn btn-secondary view-btn" onclick="toggleViewer('module5-viewer')">View PDF</button>
+                </div>
                 <iframe id="module5-viewer" class="pdf-viewer" src="./assests/module5.pdf"></iframe>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script>
         function toggleViewer(viewerId) {
             const viewer = document.getElementById(viewerId);
