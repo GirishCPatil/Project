@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VTU 21 Scheme Hub</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="./assests/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 40px 0;
+      /* flex-direction: column; */
+    }
+
+    .project-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      width: 60vw;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card h5 {
+      margin-bottom: 15px;
+      color: #2A3D45;
+    }
+
+    .project-card p {
+      margin-bottom: 15px;
+      color: #2A3D45;
+    }
+
+    .code-block {
+      background-color: #f7f7f7;
+      padding: 10px;
+      border-radius: 5px;
+      position: relative;
+      display: none;
+      /* Initially hidden */
+    }
+
+    .view-btn,
+    .copy-btn {
+      border: none;
+      background-color: #ECE2D0;
+      color: #2A3D45;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">VTU CSE 21 </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse nav2" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./notes.html">Notes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./qp.html">Question Paper</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./lab.html">Lab Manuals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://results.vtu.ac.in/">Result</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="text-center my-5">Computer Graphics Mini-Projects</h2>
+    <div class="project-container">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <h5>Project 1</h5>
+        <p>Air-Canvas using OpenCV , python.</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+
+            # All the imports go here
+            import cv2
+            import numpy as np
+            import mediapipe as mp
+            from collections import deque
+            
+            
+            # Giving different arrays to handle colour points of different colour
+            bpoints = [deque(maxlen=1024)]
+            gpoints = [deque(maxlen=1024)]
+            rpoints = [deque(maxlen=1024)]
+            ypoints = [deque(maxlen=1024)]
+            
+            
+            # These indexes will be used to mark the points in particular arrays of specific colour
+            blue_index = 0
+            green_index = 0
+            red_index = 0
+            yellow_index = 0
+            
+            #The kernel to be used for dilation purpose 
+            kernel = np.ones((5,5),np.uint8)
+            
+            colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 255, 255)]
+            colorIndex = 0
+            
+            # Here is code for Canvas setup
+            paintWindow = np.zeros((471,636,3)) + 255
+            paintWindow = cv2.rectangle(paintWindow, (40,1), (140,65), (0,0,0), 2)
+            paintWindow = cv2.rectangle(paintWindow, (160,1), (255,65), (255,0,0), 2)
+            paintWindow = cv2.rectangle(paintWindow, (275,1), (370,65), (0,255,0), 2)
+            paintWindow = cv2.rectangle(paintWindow, (390,1), (485,65), (0,0,255), 2)
+            paintWindow = cv2.rectangle(paintWindow, (505,1), (600,65), (0,255,255), 2)
+            
+            cv2.putText(paintWindow, "CLEAR", (49, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(paintWindow, "BLUE", (185, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(paintWindow, "GREEN", (298, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(paintWindow, "RED", (420, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(paintWindow, "YELLOW", (520, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.namedWindow('Paint', cv2.WINDOW_AUTOSIZE)
+            
+            
+            # initialize mediapipe
+            mpHands = mp.solutions.hands
+            hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
+            mpDraw = mp.solutions.drawing_utils
+            
+            
+            # Initialize the webcam
+            cap = cv2.VideoCapture(0)
+            ret = True
+            while ret:
+                # Read each frame from the webcam
+                ret, frame = cap.read()
+            
+                x, y, c = frame.shape
+            
+                # Flip the frame vertically
+                frame = cv2.flip(frame, 1)
+                #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+                framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+                frame = cv2.rectangle(frame, (40,1), (140,65), (0,0,0), 2)
+                frame = cv2.rectangle(frame, (160,1), (255,65), (255,0,0), 2)
+                frame = cv2.rectangle(frame, (275,1), (370,65), (0,255,0), 2)
+                frame = cv2.rectangle(frame, (390,1), (485,65), (0,0,255), 2)
+                frame = cv2.rectangle(frame, (505,1), (600,65), (0,255,255), 2)
+                cv2.putText(frame, "CLEAR", (49, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+                cv2.putText(frame, "BLUE", (185, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+                cv2.putText(frame, "GREEN", (298, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+                cv2.putText(frame, "RED", (420, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+                cv2.putText(frame, "YELLOW", (520, 33), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+                #frame = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+            
+                # Get hand landmark prediction
+                result = hands.process(framergb)
+            
+                # post process the result
+                if result.multi_hand_landmarks:
+                    landmarks = []
+                    for handslms in result.multi_hand_landmarks:
+                        for lm in handslms.landmark:
+                            # # print(id, lm)
+                            # print(lm.x)
+                            # print(lm.y)
+                            lmx = int(lm.x * 640)
+                            lmy = int(lm.y * 480)
+            
+                            landmarks.append([lmx, lmy])
+            
+            
+                        # Drawing landmarks on frames
+                        mpDraw.draw_landmarks(frame, handslms, mpHands.HAND_CONNECTIONS)
+                    fore_finger = (landmarks[8][0],landmarks[8][1])
+                    center = fore_finger
+                    thumb = (landmarks[4][0],landmarks[4][1])
+                    cv2.circle(frame, center, 3, (0,255,0),-1)
+                    print(center[1]-thumb[1])
+                    if (thumb[1]-center[1]<30):
+                        bpoints.append(deque(maxlen=512))
+                        blue_index += 1
+                        gpoints.append(deque(maxlen=512))
+                        green_index += 1
+                        rpoints.append(deque(maxlen=512))
+                        red_index += 1
+                        ypoints.append(deque(maxlen=512))
+                        yellow_index += 1
+            
+                    elif center[1] <= 65:
+                        if 40 <= center[0] <= 140: # Clear Button
+                            bpoints = [deque(maxlen=512)]
+                            gpoints = [deque(maxlen=512)]
+                            rpoints = [deque(maxlen=512)]
+                            ypoints = [deque(maxlen=512)]
+            
+                            blue_index = 0
+                            green_index = 0
+                            red_index = 0
+                            yellow_index = 0
+            
+                            paintWindow[67:,:,:] = 255
+                        elif 160 <= center[0] <= 255:
+                                colorIndex = 0 # Blue
+                        elif 275 <= center[0] <= 370:
+                                colorIndex = 1 # Green
+                        elif 390 <= center[0] <= 485:
+                                colorIndex = 2 # Red
+                        elif 505 <= center[0] <= 600:
+                                colorIndex = 3 # Yellow
+                    else :
+                        if colorIndex == 0:
+                            bpoints[blue_index].appendleft(center)
+                        elif colorIndex == 1:
+                            gpoints[green_index].appendleft(center)
+                        elif colorIndex == 2:
+                            rpoints[red_index].appendleft(center)
+                        elif colorIndex == 3:
+                            ypoints[yellow_index].appendleft(center)
+                # Append the next deques when nothing is detected to avois messing up
+                else:
+                    bpoints.append(deque(maxlen=512))
+                    blue_index += 1
+                    gpoints.append(deque(maxlen=512))
+                    green_index += 1
+                    rpoints.append(deque(maxlen=512))
+                    red_index += 1
+                    ypoints.append(deque(maxlen=512))
+                    yellow_index += 1
+            
+                # Draw lines of all the colors on the canvas and frame
+                points = [bpoints, gpoints, rpoints, ypoints]
+                # for j in range(len(points[0])):
+                #         for k in range(1, len(points[0][j])):
+                #             if points[0][j][k - 1] is None or points[0][j][k] is None:
+                #                 continue
+                #             cv2.line(paintWindow, points[0][j][k - 1], points[0][j][k], colors[0], 2)
+                for i in range(len(points)):
+                    for j in range(len(points[i])):
+                        for k in range(1, len(points[i][j])):
+                            if points[i][j][k - 1] is None or points[i][j][k] is None:
+                                continue
+                            cv2.line(frame, points[i][j][k - 1], points[i][j][k], colors[i], 2)
+                            cv2.line(paintWindow, points[i][j][k - 1], points[i][j][k], colors[i], 2)
+            
+                cv2.imshow("Output", frame) 
+                cv2.imshow("Paint", paintWindow)
+            
+                if cv2.waitKey(1) == ord('q'):
+                    break
+            
+            # release the webcam and destroy all active windows
+            cap.release()
+            cv2.destroyAllWindows()
+            
+</code></pre>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <h5>Project 2</h5>
+        <p>Mouse movement using eyes using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+import cv2
+import mediapipe as mp
+import pyautogui
+cam = cv2.VideoCapture(0)
+face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
+screen_w, screen_h = pyautogui.size()
+while True:
+    _, frame = cam.read()
+    frame = cv2.flip(frame, 1)
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    output = face_mesh.process(rgb_frame)
+    landmark_points = output.multi_face_landmarks
+    frame_h, frame_w, _ = frame.shape
+    if landmark_points:
+        landmarks = landmark_points[0].landmark
+        for id, landmark in enumerate(landmarks[474:478]):
+            x = int(landmark.x * frame_w)
+            y = int(landmark.y * frame_h)
+            cv2.circle(frame, (x, y), 3, (0, 255, 0))
+            if id == 1:
+                screen_x = screen_w * landmark.x
+                screen_y = screen_h * landmark.y
+                pyautogui.moveTo(screen_x, screen_y)
+        left = [landmarks[145], landmarks[159]]
+        for landmark in left:
+            x = int(landmark.x * frame_w)
+            y = int(landmark.y * frame_h)
+            cv2.circle(frame, (x, y), 3, (0, 255, 255))
+        if (left[0].y - left[1].y) < 0.004:
+            pyautogui.click()
+            pyautogui.sleep(1)
+    cv2.imshow('Eye Controlled Mouse', frame)
+    cv2.waitKey(1)
+</code></pre>
+        </div>
+      </div>
+
+      <!-- Add more project cards as needed -->
+      <div class="project-card">
+        <h5>Project 3</h5>
+        <p>Vigenett-effect using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+            #Import go here
+            import cv2
+            import numpy as np
+            
+            #Trackbar handler
+            def changeRadius(value):
+              global radius
+              radius = value
+              
+            
+            #For changing the focus of the mask 
+            def changeFocus(scope):
+              global value
+              value = scope
+            
+            #Reading the image and getting properties
+            img = cv2.imread('./Vigenett-effect/img.jpg')
+            rows, cols = img.shape[:2]
+            value = 1
+            radius = 130
+            mask = np.zeros((int(rows*(value*0.1+1)),int(cols*(value*0.1+1))))
+            
+            
+            cv2.namedWindow('Trackbars')
+            cv2.createTrackbar('Radius', 'Trackbars', 130, 500, changeRadius)
+            cv2.createTrackbar('Focus', 'Trackbars', 1, 10, changeFocus)
+            
+            while(True):
+              # generating vignette mask using Gaussian kernels
+              kernel_x = cv2.getGaussianKernel(int(cols*(0.1*value+1)),radius)
+              kernel_y = cv2.getGaussianKernel(int(rows*(0.1*value+1)),radius)
+              kernel = kernel_y * kernel_x.T
+              
+              #Normalizing the kernel
+              kernel = kernel/np.linalg.norm(kernel)	
+              
+              #Genrating a mask to image
+              mask = 255 * kernel
+              output = np.copy(img)
+              # applying the mask to each channel in the input image
+              mask_imposed = mask[int(0.1*value*rows):,int(0.1*value*cols):]
+              for i in range(3):
+                output[:,:,i] = output[:,:,i] * mask_imposed
+              cv2.imshow('Original', img)
+              cv2.imshow('Vignette', output)
+              key = cv2.waitKey(50)
+              if(key==ord('q')):
+                break
+              elif(key==ord('s')):
+                cv2.imwrite('output_mask{}_deviation{}.jpg', output)
+          </code></pre>
+        </div>
+      </div>
+
+      <!-- ---------- -->
+      <div class="project-card">
+        <h5>Project 4</h5>
+        <p>Hand-Gesture using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+            import cv2
+            from cvzone.HandTrackingModule import HandDetector
+            
+            cap = cv2.VideoCapture(0)
+            detector = HandDetector(detectionCon=0.8, maxHands=2)
+            
+            while True:
+                success, img = cap.read()
+                hands, img = detector.findHands(img)  # With Draw
+                # hands = detector.findHands(img, draw=False)  # No Draw
+            
+                if hands:
+                    # Hand 1
+                    hand1 = hands[0]
+                    lmList1 = hand1["lmList"]  # List of 21 Landmarks points
+                    bbox1 = hand1["bbox"]  # Bounding Box info x,y,w,h
+                    centerPoint1 = hand1["center"]  # center of the hand cx,cy
+                    handType1 = hand1["type"]  # Hand Type Left or Right
+            
+                    # print(len(lmList1),lmList1)
+                    # print(bbox1)
+                    # print(centerPoint1)
+                    fingers1 = detector.fingersUp(hand1)
+                    #length, info, img = detector.findDistance(lmList1[8], lmList1[12], img) # with draw
+                    #length, info = detector.findDistance(lmList1[8], lmList1[12])  # no draw
+            
+            
+                    if len(hands) == 2:
+                        hand2 = hands[1]
+                        lmList2 = hand2["lmList"]  # List of 21 Landmarks points
+                        bbox2 = hand2["bbox"]  # Bounding Box info x,y,w,h
+                        centerPoint2 = hand2["center"]  # center of the hand cx,cy
+                        handType2 = hand2["type"]  # Hand Type Left or Right
+            
+                        fingers2 = detector.fingersUp(hand2)
+                        # print(fingers1, fingers2)
+                        #length, info, img = detector.findDistance(lmList1[8], lmList2[8], img) # with draw
+                        length, info, img = detector.findDistance(centerPoint1, centerPoint2, img)  # with draw
+            
+                cv2.imshow("Image", img)
+                cv2.waitKey(1)
+          </code></pre>
+        </div>
+      </div>
+
+
+      <!-- --------- -->
+      <div class="project-card">
+        <h5>Project 5</h5>
+        <p>Harry-cloak invisible using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+            import cv2
+            import numpy
+            
+            
+            #initial function for the callin of the trackbar
+            def hello(x):
+              #only for referece
+              print("")
+            
+            #initialisation of the camera
+            cap = cv2.VideoCapture(0)
+            bars = cv2.namedWindow("bars")
+            
+            cv2.createTrackbar("upper_hue","bars",110,180,hello)
+            cv2.createTrackbar("upper_saturation","bars",255, 255, hello)
+            cv2.createTrackbar("upper_value","bars",255, 255, hello)
+            cv2.createTrackbar("lower_hue","bars",68,180, hello)
+            cv2.createTrackbar("lower_saturation","bars",55, 255, hello)
+            cv2.createTrackbar("lower_value","bars",54, 255, hello)
+            
+            #Capturing the initial frame for creation of background
+            while(True):
+              cv2.waitKey(1000)
+              ret,init_frame = cap.read()
+              #check if the frame is returned then brake
+              if(ret):
+                break
+            
+            # Start capturing the frames for actual magic!!
+            while(True):
+              ret,frame = cap.read()
+              inspect = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            
+              #getting the HSV values for masking the cloak
+              upper_hue = cv2.getTrackbarPos("upper_hue", "bars")
+              upper_saturation = cv2.getTrackbarPos("upper_saturation", "bars")
+              upper_value = cv2.getTrackbarPos("upper_value", "bars")
+              lower_value = cv2.getTrackbarPos("lower_value","bars")
+              lower_hue = cv2.getTrackbarPos("lower_hue","bars")
+              lower_saturation = cv2.getTrackbarPos("lower_saturation","bars")
+            
+              #Kernel to be used for dilation
+              kernel = numpy.ones((3,3),numpy.uint8)
+            
+              upper_hsv = numpy.array([upper_hue,upper_saturation,upper_value])
+              lower_hsv = numpy.array([lower_hue,lower_saturation,lower_value])
+            
+              mask = cv2.inRange(inspect, lower_hsv, upper_hsv)
+              mask = cv2.medianBlur(mask,3)
+              mask_inv = 255-mask 
+              mask = cv2.dilate(mask,kernel,5)
+              
+              #The mixing of frames in a combination to achieve the required frame
+              b = frame[:,:,0]
+              g = frame[:,:,1]
+              r = frame[:,:,2]
+              b = cv2.bitwise_and(mask_inv, b)
+              g = cv2.bitwise_and(mask_inv, g)
+              r = cv2.bitwise_and(mask_inv, r)
+              frame_inv = cv2.merge((b,g,r))
+            
+              b = init_frame[:,:,0]
+              g = init_frame[:,:,1]
+              r = init_frame[:,:,2]
+              b = cv2.bitwise_and(b,mask)
+              g = cv2.bitwise_and(g,mask)
+              r = cv2.bitwise_and(r,mask)
+              blanket_area = cv2.merge((b,g,r))
+            
+              final = cv2.bitwise_or(frame_inv, blanket_area)
+            
+              cv2.imshow("Harry's Cloak",final)
+            
+              if(cv2.waitKey(3) == ord('q')):
+                break;
+            
+            cv2.destroyAllWindows()
+            cap.release()
+    </code></pre>
+        </div>
+      </div>
+
+
+      <!-- ------------ -->
+      <div class="project-card">
+        <h5>Project 6</h5>
+        <p>Volume gesture using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+            import cv2
+            import mediapipe as mp
+            import math
+            import numpy as np
+            from ctypes import cast, POINTER
+            from comtypes import CLSCTX_ALL
+            from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+            
+            # solution APIs
+            mp_drawing = mp.solutions.drawing_utils
+            mp_drawing_styles = mp.solutions.drawing_styles
+            mp_hands = mp.solutions.hands
+            
+            # Volume Control Library Usage 
+            devices = AudioUtilities.GetSpeakers()
+            interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+            volume = cast(interface, POINTER(IAudioEndpointVolume))
+            volRange = volume.GetVolumeRange()
+            minVol , maxVol , volBar, volPer= volRange[0] , volRange[1], 400, 0
+            
+            # Webcam Setup
+            wCam, hCam = 640, 480
+            cam = cv2.VideoCapture(0)
+            cam.set(3,wCam)
+            cam.set(4,hCam)
+            
+            # Mediapipe Hand Landmark Model
+            with mp_hands.Hands(
+                model_complexity=0,
+                min_detection_confidence=0.5,
+                min_tracking_confidence=0.5) as hands:
+            
+              while cam.isOpened():
+                success, image = cam.read()
+            
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                results = hands.process(image)
+                image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+                if results.multi_hand_landmarks:
+                  for hand_landmarks in results.multi_hand_landmarks:
+                    mp_drawing.draw_landmarks(
+                        image,
+                        hand_landmarks,
+                        mp_hands.HAND_CONNECTIONS,
+                        mp_drawing_styles.get_default_hand_landmarks_style(),
+                        mp_drawing_styles.get_default_hand_connections_style()
+                        )
+            
+                # multi_hand_landmarks method for Finding postion of Hand landmarks      
+                lmList = []
+                if results.multi_hand_landmarks:
+                  myHand = results.multi_hand_landmarks[0]
+                  for id, lm in enumerate(myHand.landmark):
+                    h, w, c = image.shape
+                    cx, cy = int(lm.x * w), int(lm.y * h)
+                    lmList.append([id, cx, cy])          
+            
+                # Assigning variables for Thumb and Index finger position
+                if len(lmList) != 0:
+                  x1, y1 = lmList[4][1], lmList[4][2]
+                  x2, y2 = lmList[8][1], lmList[8][2]
+            
+                  # Marking Thumb and Index finger
+                  cv2.circle(image, (x1,y1),15,(255,255,255))  
+                  cv2.circle(image, (x2,y2),15,(255,255,255))   
+                  cv2.line(image,(x1,y1),(x2,y2),(0,255,0),3)
+                  length = math.hypot(x2-x1,y2-y1)
+                  if length < 50:
+                    cv2.line(image,(x1,y1),(x2,y2),(0,0,255),3)
+            
+                  vol = np.interp(length, [50, 220], [minVol, maxVol])
+                  volume.SetMasterVolumeLevel(vol, None)
+                  volBar = np.interp(length, [50, 220], [400, 150])
+                  volPer = np.interp(length, [50, 220], [0, 100])
+            
+                  # Volume Bar
+                  cv2.rectangle(image, (50, 150), (85, 400), (0, 0, 0), 3)
+                  cv2.rectangle(image, (50, int(volBar)), (85, 400), (0, 0, 0), cv2.FILLED)
+                  cv2.putText(image, f'{int(volPer)} %', (40, 450), cv2.FONT_HERSHEY_COMPLEX,
+                            1, (0, 0, 0), 3)
+                
+                cv2.imshow('handDetector', image) 
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                  break
+            cam.release()
+    </code></pre>
+        </div>
+      </div>
+      <!-- -------------- -->
+
+      <div class="project-card">
+        <h5>Project 7</h5>
+        <p>Photo to water-Art using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+            #Fixing the imports
+            import cv2
+            import numpy as np
+            
+            #-----------------Phase 1
+            #Readin the image
+            image = cv2.imread('./photo to water-art/shawn.jpg')
+            
+            #resizing the image
+            #Interpolation is cubic for best results
+            image_resized = cv2.resize(image, None, fx=0.5, fy=0.5)
+            
+            
+            
+            #-----------------Phase 2
+            #removing impurities from image
+            image_cleared = cv2.medianBlur(image_resized, 3)
+            image_cleared = cv2.medianBlur(image_cleared, 3)
+            image_cleared = cv2.medianBlur(image_cleared, 3)
+            
+            image_cleared = cv2.edgePreservingFilter(image_cleared, sigma_s=5)
+            
+            
+            
+            
+            #-----------------Phase 3
+            #Bilateral Image filtering 
+            image_filtered = cv2.bilateralFilter(image_cleared, 3, 10, 5)
+            
+            for i in range(2):
+              image_filtered = cv2.bilateralFilter(image_filtered, 3, 20, 10)
+            
+            for i in range(3):
+              image_filtered = cv2.bilateralFilter(image_filtered, 5, 30, 10)
+            
+            # for i in range(3):
+            # 	image_filtered = cv2.bilateralFilter(image_filtered, 5, 40, 10)
+            
+            # for i in range(2):
+            # 	image_filtered = cv2.bilateralFilter(image_filtered, 3, 40, 5)
+            
+            
+            
+            
+            #--------------------------Phase 4
+            #Sharpening the image using addWeighted()
+            gaussian_mask= cv2.GaussianBlur(image_filtered, (7,7), 2)
+            image_sharp = cv2.addWeighted(image_filtered, 1.5, gaussian_mask, -0.5, 0)
+            image_sharp = cv2.addWeighted(image_sharp, 1.4, gaussian_mask, -0.2, 10)
+            
+            
+            
+            
+            #displayng images
+            cv2.imshow('Final Image', image_sharp)
+            cv2.imshow('Clear impurities', image_cleared)
+            cv2.imshow('original', image_resized)
+            #cv2.imwrite('art_test1.jpg', image_sharp)
+            cv2.waitKey(0)
+    </code></pre>
+        </div>
+      </div>
+      <!-- ------------------ -->
+
+      <div class="project-card">
+        <h5>Project 8</h5>
+        <p>Video Reversing using OpenCV , python</p>
+        <p>Note: A reverse video file will be generated in the folder after you run the program. </p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+            # Import the library 
+            import cv2
+            
+            #Video Capture Instance
+            cap = cv2.VideoCapture('./Reverse-video/video12.mp4')
+            
+            #Properties of Video
+            
+            #Total number of frames in video
+            frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+            
+            #Frames per second of video
+            fps = cap.get(cv2.CAP_PROP_FPS)
+            
+            #height and width of video
+            height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+            width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+            
+            #Initiating the Output writer for Video
+            fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+            out = cv2.VideoWriter('reversed.avi', fourcc,fps ,(int(width*0.5), int(height*0.5)))
+            
+            print("No. of frames are : {}".format(frames))
+            print("FPS is :{}".format(fps))
+            
+            # We get the index of the last frame of the video file
+            frame_index = frames-1
+            
+            #Checking if the video instance is ready
+            if(cap.isOpened()):
+              #Reading till the end of the video
+              while(frame_index!=0):
+                # We set the current frame position to last frame
+                cap.set(cv2.CAP_PROP_POS_FRAMES, frame_index)
+                ret, frame = cap.read()
+            
+                #Resize the frame
+                frame = cv2.resize(frame,(int(width*0.5), int(height*0.5)))
+            
+                #OPTIONAL : To show the reversing video
+                #cv2.imshow('winname', frame)
+            
+                #Writing the reversed video 
+                out.write(frame)
+                #Decrementing Frame index at each step
+                frame_index = frame_index-1
+            
+                #Printing the progress
+                if(frame_index%100==0):
+                  print(frame_index)
+                # if(cv2.waitKey(2)==ord('q')):
+                # 	break
+            
+            
+            out.release()
+            cap.release()
+            cv2.destroyAllWindows()
+    </code></pre>
+        </div>
+      </div>
+      <!-- ------------------ -->
+
+      <div class="project-card">
+        <h5>Project 9</h5>
+        <p>Mouse movement using eyes using OpenCV , python</p>
+        <button class="view-btn" onclick="toggleCode(this)">View Code</button>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+          <pre><code>
+
+    </code></pre>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <script>
+    function toggleCode(button) {
+      const codeBlock = button.nextElementSibling;
+      if (codeBlock.style.display === "none" || codeBlock.style.display === "") {
+        codeBlock.style.display = "block";
+        button.innerText = "Hide Code";
+      } else {
+        codeBlock.style.display = "none";
+        button.innerText = "View Code";
+      }
+    }
+
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling.innerText;
+      navigator.clipboard.writeText(codeBlock).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => {
+          button.innerText = 'Copy Code';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

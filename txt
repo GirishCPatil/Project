@@ -1,0 +1,4 @@
+// Your project code here
+function example() {
+  console.log("Hello, world!");
+}
