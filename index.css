@@ -21,7 +21,26 @@
   z-index: 1000;
 }
 
+@media (max-width: 768px) {
+  .whatsapp {
+    
+    display: none;
 
+  }
+}
+
+
+.whatsapp{
+  position:absolute;
+  top: 40%;
+  right: 20px;
+ float: right;
+  
+}
+.whatsapp svg{
+position: fixed;
+right: 20px;
+}
 
   .welcome {
     color: #2A3D45;
