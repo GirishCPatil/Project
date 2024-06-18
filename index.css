@@ -35,11 +35,14 @@
   top: 40%;
   right: 20px;
  float: right;
+}
+.whatsapp:hover{
   
 }
 .whatsapp svg{
 position: fixed;
 right: 20px;
+
 }
 
   .welcome {
