@@ -169,3 +169,10 @@ body{
   color: white !important;
   text-align: center;
 }
+
+
+@media (max-width: 768px) {
+  .view-btn {
+      display: none !important; 
+  }
+}
