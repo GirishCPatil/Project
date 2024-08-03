@@ -34,9 +34,9 @@
 
 .whatsapp{
   position:absolute;
-  top: 30%;
-  right: 20px;
- float: right;
+  top: 28%;
+  left: 20px;
+ float: left;
 }
 .whatsapp svg:hover{
    height: 60px;
@@ -45,7 +45,7 @@
 }
 .whatsapp svg{
 position: fixed;
-right: 20px;
+/* right: 20px; */
 
 }
 
