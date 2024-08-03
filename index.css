@@ -12,6 +12,8 @@
     border-color: rgb(255, 255, 255) !important;
 }
 
+
+
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
 }
@@ -69,6 +71,11 @@ right: 20px;
     50% { border-color: black; }
   }
   
+  @media (max-width: 768px) {
+  .navbar{
+    text-align: center;
+  }
+  }
   /* Ensure the text adjusts its size based on screen width */
   @media (max-width: 768px) {
     .typing-text {
@@ -112,7 +119,7 @@ body {
 .nav-link {
     font-size: 1.1em;
     padding: 10px 20px;
-    margin-right: 35px;
+    margin-right: 30px;
     transition: background-color 0.3s, color 0.3s;
    color: white;
    
@@ -134,7 +141,7 @@ body {
 }
 
 .nav2{
-  margin-left: 180px;
+  margin-left: 20px;
 }
 
 .navbar-nav .nav-link {
